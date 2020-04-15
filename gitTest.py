@@ -4,7 +4,8 @@ maybe you could even argue that it keeps the motherboard warm on a cold day? idk
 
 """
 
-def excercise()
+def excercise():
+    print("Warming up!")
     while True:
         pass
 
