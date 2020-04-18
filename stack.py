@@ -23,6 +23,13 @@ class Stack:
     def count(self):
         return len(self.content)
 
+    def show(self):
+        reverse = ''
+        while self.content:
+            reverse += str(self.pull())
+        return reverse
+
+
 class BadStack(Stack):
 
     def push(self, item):
