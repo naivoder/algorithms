@@ -1,5 +1,5 @@
 """
-this file uses a stack to convert integer to binary
+this file uses a stack to convert integer to binary.
 
 """
 from stack import Stack
@@ -18,6 +18,7 @@ def convert(integer):
     return binaryStack.show()
 
 if __name__=="__main__":
-    num = int(input("What number should be converted? "))
-    bin = convert(num)
-    print("%s in binary is: %s" % (num,bin))
+    print("--Binary--")
+    integer = int(input("What number should be converted? "))
+    binary = convert(integer)
+    print("%s in binary is: %s" % (integer, binary))
