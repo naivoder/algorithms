@@ -31,6 +31,6 @@ if __name__=="__main__":
     print("Test:", badEquation)
     pChecker(badEquation)
 
-    reallyBadEquation = ')'
-    print("Test:", reallyBadEquation)
-    pChecker(reallyBadEquation)
+    badEquation = ')'
+    print("Test:", badEquation)
+    pChecker(badEquation)
