@@ -24,9 +24,10 @@ class Stack:
         return len(self.content)
 
     def show(self):
+        copy = self.content[:]
         reverse = ''
-        while self.content:
-            reverse += str(self.pull())
+        while copy:
+            reverse += str(copy.pop())
         return reverse
 
 
