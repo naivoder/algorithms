@@ -120,5 +120,6 @@ def hashCompare(string1, string2):
 print(hashCompare('abcde', 'abcd'))
 print(hashCompare('super', 'purse'))
 print(hashCompare('house', 'mouse'))
+print(hashCompare('coat', 'taco'))
 print(hashCompare('lose!', '!sole'))
 print(hashCompare('abcdefghijklmnopqrstuvwxyz', 'zyxwvutsrqponmlkjihgfedcba'))
