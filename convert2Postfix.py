@@ -1,5 +1,5 @@
 """
-this file implements and algorithm to convert any infix expression to postfix, optional debugging flag is included to display intermediate steps in terminal
+this file implements an algorithm to convert any infix expression to postfix, optional debugging flag is included to display intermediate steps in terminal
 
 """
 from stack import Stack
