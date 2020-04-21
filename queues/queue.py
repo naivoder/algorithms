@@ -38,6 +38,17 @@ class ReverseQueue(Queue):
     def peek(self):
         return self.content[0]
 
+class StackQueue(Queue):
+
+    def push(self, item):
+        self.content.append(item)
+
+    def pull(self):
+        return self.content.pop()
+
+    def peek(self):
+        return self.content[0]
+
 if __name__=="__main__":
 
     print("--FORWARD QUEUE--")
