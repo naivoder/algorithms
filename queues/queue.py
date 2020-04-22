@@ -24,7 +24,7 @@ class Queue:
         return len(self.content)
 
     def show(self):
-        qString = ''.join(self.content)
+        qString = ' '.join(self.content)
         return qString
 
 class ReverseQueue(Queue):
