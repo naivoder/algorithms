@@ -1,5 +1,5 @@
 """
-this file simulates a print queue, comparing outcome of two different page rates (corresponding to "higher" or "poorer" quality prints) given average use parameters. Modeling this scenario gives insight as to which page rate should be selected. This is my solution to a problem posed by Miller & Ranum. The queue.py abstract class will be used to simultate the FIFO behavior of the print queue.
+this file simulates a print queue, comparing outcome of two different page rates (corresponding to "higher" or "poorer" quality prints) given average use parameters. Modeling this scenario gives insight as to which page rate should be selected. This is my solution to a problem posed by Miller & Ranum. The queue.py abstract datatype will be used to simultate the FIFO behavior of the print queue.
 to modify simulation, for instance doubling the average use, you would increase the "print rate" value. For example if 20 people use the printer in any given hour the high and low print rates respectively would become 12 and 24
 the Miller & Ranum solution defines printer and task classes, a better structure and worth looking over for further inspiration...
 
