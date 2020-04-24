@@ -4,12 +4,16 @@ this file implements an algorithm to evaluate any postfix expression
 """
 from stack import Stack
 
-operators = '*/+-'
+operators = '*/+-'; pars = '()'
+
+def getExpression():
+    postfixExpression = input("What expression would you like to evaluate? ")
+    return postFixExpression
 
 def evaluate(postfixExpression=None, debug=False):
 
     if postfixExpression is None:
-        postfixExpression = input("\nWhat expression would you like to convert? ")
+        postfixExpression = getExpression()
 
     numberStack = Stack()
     postfixExpression = [char for char in postfixExpression.split(' ')]
