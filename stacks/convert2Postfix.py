@@ -10,18 +10,31 @@ from stack import Stack
 operators = '*/+-()'
 leftParenthesis = '('; rightParenthesis = ')'
 
+def getExpression():
+    infixExpression = input("What expression would you like to convert? ")
+    try:
+        for char in infixExpression:
+            char.isalpha() or char in operators
+    except:
+        print("Invalid expression!")
+        print("Enter expression as space delimited string...")
+        print("Example: '( A + B ) - C' ")
+        getExpression()
+    return infixExpression
+
 def compare(operatorA, operatorB):
     if operators.index(operatorA) <= operators.index(operatorB):
         return False
     return True
 
-def convertPostfix(infixExpression=None, debug=False):
+def convertToPostfix(infixExpression=None, debug=False):
 
     operatorStack = Stack()
     postfixExpression = []
 
     if infixExpression is None:
-        infixExpression = input("What expression would you like to convert? ")
+        infixExpression = getExpression()
+
     infixExpression = [char for char in infixExpression.split(' ')]
     if debug:
         print("\x1b[0;34;40m" + "###---DEBUGGING---###" + "\x1b[0m")
@@ -92,7 +105,8 @@ def convertPostfix(infixExpression=None, debug=False):
     print("The equivalent postfix expression is:", postfixString)
 
 if __name__=="__main__":
-    convertPostfix('A + ( B * C )', debug=True)
-    convertPostfix('( A + B ) * ( C + D )')
-    convertPostfix('A + B / C')
-    convertPostfix('( A + B ) * C')
+    convertToPostfix('A + ( B * C )', debug=True)
+    convertToPostfix('( A + B ) * ( C + D )')
+    convertToPostfix('A + B / C')
+    convertToPostfix('( A + B ) * C')
+    convertToPostfix()
