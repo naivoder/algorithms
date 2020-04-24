@@ -7,7 +7,7 @@ This class defines a Fraction object, and provides method overrides so that all 
 
 class Fraction:
 
-  #class contstructor 
+  #class contstructor
   def __init__(self, top, bottom):
     self.num = top
     self.den = bottom
@@ -40,14 +40,14 @@ class Fraction:
     first = self.num * fraction.den
     second = fraction.num * self.den
     return first == second
-      
+
   #override of multiplication method
   def __mul__(self, fraction):
      top = self.num * fraction.num
      bottom = self.den * fraction.den
      divisor = self.gcd(top, bottom)
      return Fraction(top//divisor, bottom//divisor)
-  
+
   #override of division method
   def __truediv__(self, fraction):
      reciprocal = Fraction(fraction.den, fraction.num)
