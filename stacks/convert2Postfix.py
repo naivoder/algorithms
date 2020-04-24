@@ -12,14 +12,6 @@ leftParenthesis = '('; rightParenthesis = ')'
 
 def getExpression():
     infixExpression = input("What expression would you like to convert? ")
-    try:
-        for char in infixExpression:
-            char.isalpha() or char in operators
-    except:
-        print("Invalid expression!")
-        print("Enter expression as space delimited string...")
-        print("Example: '( A + B ) - C' ")
-        getExpression()
     return infixExpression
 
 def compare(operatorA, operatorB):
