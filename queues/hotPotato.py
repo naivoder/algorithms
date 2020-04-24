@@ -6,12 +6,6 @@ this file simulates the Josephus problem, aka a game of "hot potato". Rather tha
 import time
 from queue import Queue
 
-people = ['Bob', 'Linda', 'Gene', 'Luise', 'Tina', 'Teddy', 'Mort']
-players = Queue(); roundTime = 10
-
-for person in people:
-    players.push(person)
-
 def potato():
     passer = players.pull()
     players.push(passer)
@@ -42,4 +36,10 @@ def clock(roundTime=None):
             clock(roundTime)
 
 if __name__=="__main__":
+    people = ['Bob', 'Linda', 'Gene', 'Luise', 'Tina', 'Teddy', 'Mort']
+    players = Queue(); roundTime = 10
+
+    for person in people:
+        players.push(person)
+
     clock(roundTime)

@@ -24,7 +24,7 @@ class Queue:
         return len(self.content)
 
     def show(self):
-        qString = ' '.join(self.content)
+        qString = ''.join(str(self.content))
         return qString
 
 class ReverseQueue(Queue):
@@ -63,6 +63,7 @@ if __name__=="__main__":
 
     queue.push(False)
     print("The queue has %d items" % queue.count())
+    queue.show()
 
     queue.pull(); queue.pull()
     print("The next item in the queue is '%s'" % queue.peek())
