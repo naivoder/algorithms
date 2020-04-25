@@ -8,7 +8,7 @@ operators = '*/+-'; pars = '()'
 
 def getExpression():
     postfixExpression = input("What expression would you like to evaluate? ")
-    return postFixExpression
+    return postfixExpression
 
 def evaluate(postfixExpression=None, debug=False):
 

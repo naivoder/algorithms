@@ -25,7 +25,7 @@ class Queue:
 
     def show(self):
         qString = ''.join(str(self.content))
-        return qString
+        print(qString)
 
 class ReverseQueue(Queue):
 
