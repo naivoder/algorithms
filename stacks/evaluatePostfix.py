@@ -25,33 +25,33 @@ def evaluate(postfixExpression=None, debug=False):
         if char.isdigit():
             numberStack.push(int(char))
             if debug:
-                print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m", numberStack.show())
+                print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m" + str(numberStack))
 
         elif char in operators:
 
             if char is '*':
                 result = numberStack.pull() * numberStack.pull()
                 if debug:
-                    print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m", numberStack.show())
+                    print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m" + str(numberStack))
 
             elif char is '/':
                 result = numberStack.pull() / numberStack.pull()
                 if debug:
-                    print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m", numberStack.show())
+                    print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m" + str(numberStack))
 
             elif char is '+':
                 result = numberStack.pull() + numberStack.pull()
                 if debug:
-                    print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m", numberStack.show())
+                    print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m" + str(numberStack))
 
             else:
                 result = numberStack.pull() - numberStack.pull()
                 if debug:
-                    print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m", numberStack.show())
+                    print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m" + str(numberStack))
 
             numberStack.push(result)
             if debug:
-                print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m", numberStack.show())
+                print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m" + str(numberStack))
 
     print("\nExpression:", postfixString)
 

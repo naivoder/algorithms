@@ -8,6 +8,9 @@ class Stack:
     def __init__(self):
         self.content = []
 
+    def __str__(self):
+        return str(self.content)
+
     def isEmpty(self):
         return len(self.content) == 0
 
@@ -56,6 +59,7 @@ if __name__=="__main__":
 
     stack.push(False)
     print("The stack has %d items" % stack.count())
+    print(stack)
 
     stack.pull(); stack.pull()
     print("The top item in the stack is '%s'" % stack.peek())
