@@ -7,16 +7,22 @@ import random
 class CardDeck:
 
     def __init__(self):
-        self.cards = '123456789JQKA'
+        self.numbers = '123456789JQKA'
         self.suits = ['Clubs', 'Spades', 'Hearts', 'Diamonds']
+        self.deck = []
+        for suit in self.suits:
+            for number in self.numbers:
+                self.deck.append((number, suit))
 
+    def count(self):
+        return len(self.deck)
 
     def drawACard(self):
-        randomCard = random.randint(0, 12)
-        randomSuit = random.randint(0, 3)
-        draw = (self.cards[randomCard], self.suits[randomSuit])
-        print(draw)
+        draw = random.choice(self.deck)
+        self.deck.remove(draw)
+        #draw = (self.cards[randomCard], self.suits[randomSuit])
         return draw
+
 
 class Hand:
 
@@ -26,6 +32,9 @@ class Hand:
     def __str__(self):
         for card in self.hand:
             print(card)
+
+    def count(self):
+        return len(self.hand)
 
     def discard(self, item):
         try:
@@ -49,4 +58,5 @@ if __name__=="__main__":
         myHand.keepCard(myTurn)
         myHand.showHand()
         myHand.discard(myTurn)
+        print(cards.count())
         startGame = input("Draw another? (y/n) ")
