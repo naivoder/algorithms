@@ -8,6 +8,9 @@ class Queue:
     def __init__(self):
         self.content = []
 
+    def __str__(self):
+        return str(self.content)
+
     def isEmpty(self):
         return len(self.content) == 0
 
