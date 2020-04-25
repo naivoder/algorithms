@@ -12,13 +12,15 @@ def potato():
     return players.peek()
 
 def clock(roundTime=None):
+    players.print()
     if roundTime is None:
         roundTime = input("How many seconds should each round last? ")
-    print("\nIn the game:", players.show())
-    print("Starting the clock!")
+
+    print("\nStarting the clock!")
     timesUp = False
     start = time.time()
     count = 1
+
     while not timesUp:
         holding = potato()
         end = time.time() - start
@@ -26,8 +28,10 @@ def clock(roundTime=None):
         if end >= roundTime:
             timesUp = True
     out = players.pull()
+
     print("Hot potato was passed %s times..." % count)
     print("%s is out!" % out)
+
     if players.count() == 1:
         print("%s is the winner!" % players.peek())
     else:

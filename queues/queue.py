@@ -23,9 +23,23 @@ class Queue:
     def count(self):
         return len(self.content)
 
+    def print(self):
+        print("The queue: ", end="")
+        for item in self.content:
+            print(item, end=" ")
+        print("")
+
     def show(self):
-        qString = ''.join(str(self.content))
-        print(qString)
+        try:
+            qString = ' '.join(self.content)
+            print(qString)
+        except:
+            print("\nThis command is for string queues only!")
+            yes = input("Try self.print()? (y/n) ")
+            if yes is 'y':
+                self.print()
+            else:
+                print("")
 
 class ReverseQueue(Queue):
 
@@ -63,6 +77,7 @@ if __name__=="__main__":
 
     queue.push(False)
     print("The queue has %d items" % queue.count())
+    queue.print()
     queue.show()
 
     queue.pull(); queue.pull()
