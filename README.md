@@ -1,5 +1,5 @@
 # algorithms
-Solutions to interesting problems, implementations of cool algorithms. Having fun with python :+1:
+Solutions to interesting problems, implementations of cool algorithms. Having fun with python :snake:
 
 These solutions all use Python 3. 
 Inspiration for these problems has come from many places, including but not limited to:
