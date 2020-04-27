@@ -1,7 +1,7 @@
 """
 this file simulates a car wash, comparing outcome of two different "wash qualities" to determine the most advantageous combination of quality/price.
 results: lower quality results in potential for highest earnings, but higher quality averages consistently higher earnings per hour
-recommendation: business owner should select high quality settings
+recommendation: business owner should select high quality settings. if visitors did not display tendency to avoid percieved "long" queue lines, the business could strive to maximize income with low quality wash settings.
 
 """
 # problem parameters:
