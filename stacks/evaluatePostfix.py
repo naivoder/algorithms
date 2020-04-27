@@ -45,7 +45,8 @@ def evaluate(postfixExpression=None, debug=False):
                     print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m" + str(numberStack))
 
             else:
-                result = numberStack.pull() - numberStack.pull()
+                b = numberStack.pull(); a = numberStack.pull()
+                result = a - b
                 if debug:
                     print("\x1b[0;33;40m" + "\nNumber Stack:" + "\x1b[0m" + str(numberStack))
 
