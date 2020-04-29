@@ -11,18 +11,18 @@ ground = None
 class OrderedList:
 
     def __init__(self):
-        self.head = ground
+        self.head = [ground, 0]
 
     def __str__(self):
         stuff = []
-        step = self.head
+        step = self.head[0]
         while step != ground:
             stuff.append(step.content())
             step = step.reference()
         return str(stuff)
 
     def search(self, item):
-        step = self.head
+        step = self.head[0]
         found = False
         finished = False
         while step != ground and not found and not finished:
@@ -37,7 +37,7 @@ class OrderedList:
 
     def add(self, item):
         hold = Node(item)
-        step = self.head
+        step = self.head[0]
         last = ground
         finished = False
         while step != ground and not finished:
@@ -48,13 +48,14 @@ class OrderedList:
                 step = step.reference()
         if last == ground:
             hold.point(ground)
-            self.head = hold
+            self.head[0] = hold
         else:
             hold.point(step)
             last.point(hold)
+        self.head[1] += 1
 
     def remove(self, item):
-        step = self.head
+        step = self.head[0]
         last = None
         found = False
         while not found:
@@ -64,15 +65,16 @@ class OrderedList:
                 last = step
                 step = step.reference()
         if last == ground:
-            self.head = step.reference()
+            self.head[0] = step.reference()
         else:
             last.point(step.reference())
+        self.head[1] -= 1
 
     def isEmpty(self):
-        return self.head == ground
+        return self.head[0] == ground
 
     def size(self):
-        step = self.head
+        step = self.head[0]
         count = 0
         while step != ground:
             count += 1
@@ -80,7 +82,7 @@ class OrderedList:
         return count
 
     def index(self, item):
-        step = self.head
+        step = self.head[0]
         found = False
         count = 0
         while not found:
@@ -92,14 +94,14 @@ class OrderedList:
         return count
 
     def pop(self, pos=None):
-        step = self.head
+        step = self.head[0]
         last = None
         if pos is None:
             while step.reference() != ground:
                 last = step
                 step = step.reference()
             if last == None:
-                self.head = step.reference()
+                self.head[0] = step.reference()
             else:
                 last.point(step.reference())
         else:
@@ -108,9 +110,13 @@ class OrderedList:
                 last = step
                 step = step.reference()
             if last == None:
-                self.head = step.reference()
+                self.head[0] = step.reference()
             else:
                 last.point(step.reference())
+        self.head[1] -= 1
+
+    def length(self):
+        return self.head[1]
 
 if __name__=="__main__":
     print("##---ORDERED LINKED LIST---##")
@@ -144,3 +150,4 @@ if __name__=="__main__":
     list.pop(0)
     print("Pop from 0...")
     print("Linked List:", list)
+    print("Length of list:", list.length())
