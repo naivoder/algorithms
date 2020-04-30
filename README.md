@@ -11,3 +11,10 @@ Inspiration for these problems has come from many places, including but not limi
 5) Learning Python - Lutz
 
 I highly recommend all of these books.
+
+### installation
+If you clone this repository, I would advise adding the /algorithms/ directory to your python path at the command line:
+
+1) `nano ~.local/lib/your-python-distro/site-packages/path.pth`
+2) add line: "/home/your-user-name/algorithms"
+
