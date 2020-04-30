@@ -16,5 +16,5 @@ I highly recommend all of these books.
 If you clone this repository, I would advise adding the /algorithms/ directory to your python path at the command line:
 
 1) `nano ~.local/lib/your-python-distro/site-packages/path.pth`
-2) add line: "/home/your-user-name/algorithms"
+2) add line: "/path/to/your/algorithms"
 
