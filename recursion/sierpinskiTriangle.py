@@ -31,7 +31,7 @@ def center(top, bottom):
 # recursive routine
 def sierpinski(points, degree, turtle):
     # color map
-    colors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet', 'white']
+    colors = ['blue', 'violet', 'white', 'blue', 'violet', 'white']
     # draw first triangle
     draw(points, colors[degree % len(colors)], turtle)
     if degree > 0:
@@ -44,8 +44,8 @@ def sierpinski(points, degree, turtle):
 def main():
     Timmy = turtle.Turtle()
     world = turtle.Screen()
-    init = [(-400, -200), (0, 400), (400, -200)]
-    sierpinski(init, 8, turtle)
+    init = [(-800, -400), (0, 800), (800, -400)]
+    sierpinski(init, 10, turtle)
     world.exitonclick()
 
 if __name__=="__main__":
