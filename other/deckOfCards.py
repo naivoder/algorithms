@@ -17,6 +17,16 @@ class CardDeck:
     def count(self):
         return len(self.deck)
 
+    def deal(self, playerList, number):
+        loop = 1
+        while loop <= number:
+            for player in playerList:
+                draw = random.choice(self.deck)
+                self.deck.remove(draw)
+                player.keepCard(draw)
+            loop += 1
+        return playerList
+
     def drawACard(self):
         draw = random.choice(self.deck)
         self.deck.remove(draw)
@@ -52,6 +62,11 @@ class Hand:
 if __name__=="__main__":
     cards = CardDeck()
     myHand = Hand()
+    theirHand = Hand()
+    [myHand, theirHand] = cards.deal([myHand, theirHand], 3)
+    print("Dealing...")
+    print("My hand:"); myHand.showHand()
+    print("Their hand:"); theirHand.showHand()
     startGame = input("Draw a card? (y/n) ")
     while startGame is 'y':
         myTurn = cards.drawACard()
