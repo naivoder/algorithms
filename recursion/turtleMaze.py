@@ -37,8 +37,9 @@ class Maze:
         self.window.setup(width = 600, height = 600)
         self.window.setworldcoordinates(- (columns - 1) / 2 - .5, - (rows - 1) / 2 - .5, (columns - 1) / 2 + .5, (rows - 1) / 2 + .5)
 
-    def draw(self):
-        print(self.grid)
+    def draw(self, debug=False):
+        if debug:
+            print(self.grid)
         self.Timmy.speed(10)
         for y in range(self.rows):
             for x in range(self.columns):
