@@ -8,6 +8,7 @@ adapted from Miller & Ranum.
 towerA = [4,3,2,1]
 towerB = []
 towerC = []
+
 def moveTower(stackHeight, fromPole, toPole, viaPole):
     if stackHeight > 0:
         moveTower(stackHeight - 1, fromPole, viaPole, toPole)
