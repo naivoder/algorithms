@@ -4,7 +4,7 @@ Solutions to interesting problems, implementations of cool algorithms. Having fu
 These solutions all use Python 3. 
 Inspiration for these problems has come from many places, including but not limited to:
 
-1) Problem Solving with Data Structures and Algorithms - Miller and Radnum
+1) Problem Solving with Data Structures and Algorithms - Miller and Ranum
 2) Elements of Programming Interviews in Python - Aziz, Lee and Prakash
 3) Programming Pearls - Bentley
 4) Cracking the Coding Interview - McDowell
