@@ -1,5 +1,6 @@
 """
-this file implements a merge sort algorithm, a recursive "divide and conquer" algorithm that continually splits lists in half
+this file implements a merge sort algorithm, a recursive "divide and conquer" algorithm that continually splits lists in half.
+since dividing a list of size n can be done logn times, and the merge function requires n operations, the total runtime is O(nlogn)
 
 """
 import random
@@ -11,7 +12,7 @@ def merge(collection, debug=False):
         # split and run merge sort on both halves
         midpoint = len(collection) // 2
         left, right = collection[:midpoint], collection[midpoint:]
-        merge(left); merge(right)
+        merge(left, debug=debug); merge(right, debug=debug)
         # take smallest item from each list (i, j) and place back into collection at position k
         i, j, k = 0, 0, 0
         while i < len(left) and j < len(right):
@@ -37,6 +38,7 @@ def merge(collection, debug=False):
     return collection
 
 if __name__=="__main__":
-    test_data = [random.randint(1, 100) for index in range(2000)]
+    test_data = [random.randint(1, 100) for index in range(20)]
     print("###---Merge Sort---###")
-    merge(test_data, debug=True)
+    print("Unsorted Data:", test_data)
+    print("Sorted Data:", merge(test_data, debug=True))
