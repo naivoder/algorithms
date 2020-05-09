@@ -22,6 +22,7 @@ ffiTime = ffiBubble.timeit(number=1000)
 wfiTime = wfiBubble.timeit(number=1000)
 simTime = simBubble.timeit(number=1000)
 
+print("Sorting, this may take a while...")
 print("FFI Bubble Sort Algorithm: %5.3fs" % ffiTime)
 print("WFI Bubble Sort Algorithm: %5.3fs" % wfiTime)
 print("Simul-Swap Bubble Sort Algorithm: %5.3fs" % simTime)
