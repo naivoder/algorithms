@@ -12,6 +12,12 @@ class Deque():
     def __str__(self):
         return ''.join(str(self.content))
 
+    def __len__(self):
+        return len(self.content)
+
+    def __contains__(self, item):
+        return True if item in self.content else False
+
     def isEmpty(self):
         return len(self.content) == 0
 
@@ -43,7 +49,10 @@ if __name__=="__main__":
     deque.pushFront(999)
     deque.pushRear('blue')
     print("Deque:",deque)
+    if 'blue' in deque:
+        print("'Blue' is in the deque.")
     deque.pullFront()
+    print("After pulling, the deque has length = %s" % len(deque))
     deque.pushRear(37)
     print("Items in deck:", deque.count())
     print("Deque:", deque)
