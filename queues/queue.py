@@ -11,6 +11,12 @@ class Queue:
     def __str__(self):
         return str(self.content)
 
+    def __len__(self):
+        return len(self.content)
+
+    def __contains__(self, item):
+        return True if item in self.content else False
+
     def isEmpty(self):
         return len(self.content) == 0
 
@@ -40,6 +46,7 @@ class Queue:
             print("\nThis command is for string queues only!")
             yes = input("Try self.print()? (y/n) ")
             if yes is 'y':
+                print("...Error Caught!")
                 self.print()
             else:
                 print("")
@@ -83,6 +90,8 @@ if __name__=="__main__":
     queue.print()
     queue.show()
 
+    print("'False' is in the queue.") if False in queue else print("'False' is not in the queue.")
+
     queue.pull(); queue.pull()
     print("The next item in the queue is '%s'" % queue.peek())
 
@@ -93,6 +102,7 @@ if __name__=="__main__":
         print("The queue is empty!")
 
     queue.push(3261990)
+    print("Now the queue has %s item." % len(queue))
     queue.push('puppy dog')
     print("The next item in the queue is '%s'" % queue.peek())
 

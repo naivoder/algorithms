@@ -11,6 +11,12 @@ class Stack:
     def __str__(self):
         return str(self.content)
 
+    def __len__(self):
+        return len(self.content)
+
+    def __contains__(self, item):
+        return True if item in self.content else False
+
     def isEmpty(self):
         return len(self.content) == 0
 
