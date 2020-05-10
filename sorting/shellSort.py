@@ -4,13 +4,14 @@ this file implements the shell sort algorithm, which improves upon insertion sor
 """
 import random
 
-def shell(collection):
+def shell(collection, debug=False):
     sublists = len(collection) // 2
     step = 1
     while sublists > 0:
         for start in range(sublists):
             gapInsertion(collection, start, sublists)
-        print("Step", step, ":", collection)
+        if debug:
+            print("Step", step, ":", collection)
         sublists = sublists // 2
         step += 1
     return collection
