@@ -78,6 +78,12 @@ class HashTable:
                 mapstring += ", "
         return mapstring + "]"
 
+    def __len__(self):
+        return self.size
+
+    def __contains__(self, key):
+        return True if key in self.slots else False
+
 if __name__=="__main__":
     table = HashTable(debug=False)
     test = ['cat', 'dog', 'lion', 'fish', 'bird', 'tiger', 'cow', 'goat', 'chicken', 'pig']
@@ -88,3 +94,5 @@ if __name__=="__main__":
     print("\nChanging a key:value pair...\n")
     table[329] = 'duck'
     print(table)
+    print("The hash table has %s slots." % len(table))
+    print("'312' is a key in the table.") if 312 in table else print("'312' is not a key in the table.")
