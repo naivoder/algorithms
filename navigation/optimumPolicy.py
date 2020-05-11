@@ -9,16 +9,13 @@ forward = [[-1,  0], # go up
            [ 0, -1], # go left
            [ 1,  0], # go down
            [ 0,  1]] # go right
+           
 forward_name = ['up', 'left', 'down', 'right']
 
-# action has 3 values: right turn, no turn, left turn
+# right turn, no turn, left turn
 action = [-1, 0, 1]
 action_name = ['R', '#', 'L']
 
-
-# grid format:
-#     0 = navigable space
-#     1 = unnavigable space
 grid = [[1, 1, 1, 0, 0, 0],
         [1, 1, 1, 0, 1, 0],
         [0, 0, 0, 0, 0, 0],
@@ -31,10 +28,9 @@ init = [4, 3, 0] # given in the form [row,col,direction]
                  #             2: down
                  #             3: right
 
-goal = [2, 0] # given in the form [row,col]
+goal = [2, 0]
 
-cost = [2, 1, 20] # cost has 3 values, corresponding to making
-                  # a right turn, no turn, and a left turn
+cost = [2, 1, 20] # right turn, no turn, and a left turn
 
 def optimum_policy2D(grid,init,goal,cost):
 
@@ -101,5 +97,6 @@ def optimum_policy2D(grid,init,goal,cost):
         print(policy2D[i])
 
     return policy2D
+
 if __name__=="__main__":
     optimum_policy2D(grid,init,goal,cost)
