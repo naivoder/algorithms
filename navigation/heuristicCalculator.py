@@ -1,5 +1,6 @@
 """
-this file implements the value calculation required for a-star and dynamic programming, returning a heuristic based on current position and known obstacles.
+this file implements the value calculation required for a-star, returning a heuristic based on current position and known obstacles.
+modify the grid to change the navigation space the algorithm must compute.
 
 """
 
