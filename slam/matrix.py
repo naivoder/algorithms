@@ -1,13 +1,13 @@
 """
-this file implements a custom matrix class, credit to Sebastian Thrun, which can be used to perform complex matrix calculations without the use of the NumPy library. this class implementation is used extensively in my SLAM implementations.
+this file implements a custom matrix class, credit to Sebastian Thrun, modified to work with Python3 which can be used to perform complex matrix calculations without the use of the NumPy library. this class implementation is used extensively in my SLAM implementations.
 
 """
 
 
 from math import *
-import random
 
 class matrix:
+
 
     def __init__(self, value = [[]]):
         self.value = value
@@ -16,21 +16,23 @@ class matrix:
         if value == [[]]:
             self.dimx = 0
 
-    def zero(self, dimx, dimy = 0):
+
+    def zero(self, dimx, dimy):
         if dimy == 0:
             dimy = dimx
         # check if valid dimensions
         if dimx < 1 or dimy < 1:
-            raise ValueError, "Invalid size of matrix"
+            raise ValueError("Invalid size of matrix")
         else:
             self.dimx  = dimx
             self.dimy  = dimy
             self.value = [[0.0 for row in range(dimy)] for col in range(dimx)]
 
+
     def identity(self, dim):
         # check if valid dimension
         if dim < 1:
-            raise ValueError, "Invalid size of matrix"
+            raise ValueError("Invalid size of matrix")
         else:
             self.dimx  = dim
             self.dimy  = dim
@@ -38,15 +40,17 @@ class matrix:
             for i in range(dim):
                 self.value[i][i] = 1.0
 
+
     def show(self, txt = ''):
         for i in range(len(self.value)):
-            print txt + '['+ ', '.join('%.3f'%x for x in self.value[i]) + ']'
-        print ' '
+            print(txt + '['+ ', '.join('%.3f'%x for x in self.value[i]) + ']')
+        print(' ')
+
 
     def __add__(self, other):
         # check if correct dimensions
         if self.dimx != other.dimx or self.dimy != other.dimy:
-            raise ValueError, "Matrices must be of equal dimension to add"
+            raise ValueError("Matrices must be of equal dimension to add")
         else:
             # add if correct dimensions
             res = matrix()
@@ -56,10 +60,11 @@ class matrix:
                     res.value[i][j] = self.value[i][j] + other.value[i][j]
             return res
 
+
     def __sub__(self, other):
         # check if correct dimensions
         if self.dimx != other.dimx or self.dimy != other.dimy:
-            raise ValueError, "Matrices must be of equal dimension to subtract"
+            raise ValueError("Matrices must be of equal dimension to subtract")
         else:
             # subtract if correct dimensions
             res = matrix()
@@ -69,10 +74,11 @@ class matrix:
                     res.value[i][j] = self.value[i][j] - other.value[i][j]
             return res
 
+
     def __mul__(self, other):
         # check if correct dimensions
         if self.dimy != other.dimx:
-            raise ValueError, "Matrices must be m*n and n*p to multiply"
+            raise ValueError("Matrices must be m*n and n*p to multiply")
         else:
             # multiply if correct dimensions
             res = matrix()
@@ -83,6 +89,7 @@ class matrix:
                         res.value[i][j] += self.value[i][k] * other.value[k][j]
         return res
 
+
     def transpose(self):
         # compute transpose
         res = matrix()
@@ -92,11 +99,12 @@ class matrix:
                 res.value[j][i] = self.value[i][j]
         return res
 
+
     def take(self, list1, list2 = []):
         if list2 == []:
             list2 = list1
         if len(list1) > self.dimx or len(list2) > self.dimy:
-            raise ValueError, "list invalid in take()"
+            raise ValueError("list invalid in take()")
 
         res = matrix()
         res.zero(len(list1), len(list2))
@@ -105,11 +113,12 @@ class matrix:
                 res.value[i][j] = self.value[list1[i]][list2[j]]
         return res
 
+
     def expand(self, dimx, dimy, list1, list2 = []):
         if list2 == []:
             list2 = list1
         if len(list1) > self.dimx or len(list2) > self.dimy:
-            raise ValueError, "list invalid in expand()"
+            raise ValueError("list invalid in expand()")
 
         res = matrix()
         res.zero(dimx, dimy)
@@ -118,7 +127,9 @@ class matrix:
                 res.value[list1[i]][list2[j]] = self.value[i][j]
         return res
 
+
     def Cholesky(self, ztol= 1.0e-5):
+
         res = matrix()
         res.zero(self.dimx, self.dimx)
 
@@ -129,7 +140,7 @@ class matrix:
                 res.value[i][i] = 0.0
             else:
                 if d < 0.0:
-                    raise ValueError, "Matrix not positive-definite"
+                    raise ValueError("Matrix not positive-definite")
                 res.value[i][i] = sqrt(d)
             for j in range(i+1, self.dimx):
                 S = sum([res.value[k][i] * res.value[k][j] for k in range(i)])
@@ -138,13 +149,16 @@ class matrix:
                 try:
                    res.value[i][j] = (self.value[i][j] - S)/res.value[i][i]
                 except:
-                   raise ValueError, "Zero diagonal"
+                   raise ValueError("Zero diagonal")
         return res
 
+
     def CholeskyInverse(self):
+
         res = matrix()
         res.zero(self.dimx, self.dimx)
 
+        # Backward step for inverse.
         for j in reversed(range(self.dimx)):
             tjj = self.value[j][j]
             S = sum([self.value[j][k]*res.value[j][k] for k in range(j+1, self.dimx)])
@@ -162,3 +176,8 @@ class matrix:
 
     def __repr__(self):
         return repr(self.value)
+
+if __name__=="__main__":
+    matrix = matrix()
+    matrix.zero(2,2)
+    print("Matrix:", matrix)
