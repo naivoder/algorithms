@@ -1,7 +1,8 @@
 """
-this file implements the graph SLAM algorithm, returning estimated robot position as well as landmark locations after a series of moves. all credit for my understanding of SLAM algorithms goes to Sebastian Thrun! Check out his work for Standford and Google's self-driving car teams.
+this file implements the 'online' modification of the graph SLAM algorithm, which stores only the most recent robot positional data while expanding the map location data as more landmarks are discovered
 
 """
+
 from robot import *
 from matrix import *
 
@@ -41,7 +42,6 @@ def make_data(N, num_landmarks, world_size, measurement_range, motion_noise, mea
         # we are done when all landmarks were observed; otherwise re-run
         complete = (sum(seen) == num_landmarks)
 
-    print(' ')
     print('Landmarks: ', r.landmarks)
     print(r)
 
@@ -57,59 +57,71 @@ def print_result(N, num_landmarks, result):
         print('    ['+ ', '.join('%.3f'%x for x in result.value[2*(N+i)]) + ', ' \
             + ', '.join('%.3f'%x for x in result.value[2*(N+i)+1]) +']')
 
-def slam(data, N, num_landmarks, motion_noise, measurement_noise):
+def online_slam(data, N, num_landmarks, motion_noise, measurement_noise):
+    #set dimensions
+    dim = 2 * (1 + num_landmarks)
 
-    #set dimension of filter
-    dim = 2 * (N + num_landmarks)
-
-    #make constraint matrix and vector
+    #define constraint matrices
     omega = matrix()
     omega.zero(dim, dim)
+    xi = matrix ()
+    xi.zero(dim, 1)
+
+    #set initial position
     omega.value[0][0] = 1.0
     omega.value[1][1] = 1.0
 
-    xi = matrix()
-    xi.zero(dim,1)
     xi.value[0][0] = world_size / 2.0
     xi.value[1][0] = world_size / 2.0
 
     #process data
     for k in range(len(data)):
-
-        #index of robot pose
-        n = k * 2
         measurement = data[k][0]
         motion      = data[k][1]
 
         #integrate measurements
         for i in range(len(measurement)):
 
-            #index of landmark pose
-            m = 2 * (N + measurement[i][0])
+            #index of landmark position
+            m = 2 * (1 + measurement[i][0])
 
-            #update contraints based on measurement
+            #update constraints based on measurement
             for b in range(2):
-                omega.value[n+b][n+b]   +=  1.0 / measurement_noise
+                omega.value[b][b]       +=  1.0 / measurement_noise
                 omega.value[m+b][m+b]   +=  1.0 / measurement_noise
-                omega.value[n+b][m+b]   += -1.0 / measurement_noise
-                omega.value[m+b][n+b]   += -1.0 / measurement_noise
+                omega.value[b][m+b]     += -1.0 / measurement_noise
+                omega.value[m+b][b]     += -1.0 / measurement_noise
 
-                xi.value[n+b][0]  += -measurement[i][1+b] / measurement_noise
-                xi.value[m+b][0]  +=  measurement[i][1+b] / measurement_noise
+                xi.value[b][0]      += -measurement[i][1+b] / measurement_noise
+                xi.value[m+b][0]    +=  measurement[i][1+b] / measurement_noise
 
-        #update constraints based on movement
+        r = range(4, dim+2)
+        rng = list(r)
+        lst = [0, 1] + rng
+        omega = omega.expand(dim+2, dim+2, lst, lst)
+        xi = xi.expand(dim+2, 1, lst, [0])
+
+        #update constraint matrix based on movement
         for b in range(4):
-            omega.value[n+b][n+b]   +=  1.0 / motion_noise
+            omega.value[b][b]   +=  1.0 / motion_noise
         for b in range(2):
-            omega.value[n+b][n+b+2] += -1.0 / motion_noise
-            omega.value[n+b+2][n+b] += -1.0 / motion_noise
+            omega.value[b][b+2] += -1.0 / motion_noise
+            omega.value[b+2][b] += -1.0 / motion_noise
 
-            xi.value[n+b][0]        += -motion[b] / motion_noise
-            xi.value[n+b+2][0]      +=  motion[b] / motion_noise
+            xi.value[b][0]      += -motion[b] / motion_noise
+            xi.value[b+2][0]    +=  motion[b] / motion_noise
 
-    #compute estimates
+        #factor out previous pose
+        newlist = range(2, len(omega.value))
+        a = omega.take([0,1], newlist)
+        b = omega.take([0,1])
+        c = xi.take([0,1], [0])
+        omega = omega.take(newlist) - a.transpose() * b.inverse() * a
+        xi = xi.take(newlist, [0]) - a.transpose() * b.inverse() * c
+
+    #compute best estimate
     mu = omega.inverse() * xi
-    return mu
+    return mu, omega
 
 if __name__=="__main__":
     num_landmarks      = 5        # number of landmarks
@@ -120,7 +132,7 @@ if __name__=="__main__":
     measurement_noise  = 2.0      # noise in the measurements
     distance           = 20.0     # distance by which robot (intends to) move each iteratation
 
-    print("###---Graph SLAM---###")
+    print("###---Online SLAM---###")
     data = make_data(N, num_landmarks, world_size, measurement_range, motion_noise, measurement_noise, distance)
-    result = slam(data, N, num_landmarks, motion_noise, measurement_noise)
-    print_result(N, num_landmarks, result)
+    result = online_slam(data, N, num_landmarks, motion_noise, measurement_noise)
+    print_result(1, num_landmarks, result[0])
