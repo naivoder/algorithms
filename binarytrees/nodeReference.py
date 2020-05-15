@@ -36,7 +36,7 @@ class BinaryTree:
         return self.left_child
 
     def set_root(self, obj):
-        self.key = obj
+        self.root = obj
 
     def get_root(self):
         return self.root
