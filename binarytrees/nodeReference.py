@@ -29,6 +29,27 @@ class BinaryTree:
             growth = BinaryTree(branch)
             growth.left_child, self.left_child = self.left_child, growth
 
+    def preorder(self):
+        print(self.root)
+        if self.left_child:
+            self.left_child.preorder()
+        if self.right_child:
+            self.right_child.preorder()
+
+    def postorder(self):
+        if self.left_child:
+            self.left_child.postorder()
+        if self.right_child:
+            self.right_child.postorder()
+        print(self.root)
+
+    def inorder(self):
+        if self.left_child:
+            self.left_child.inorder()
+        print(self.root)
+        if self.right_child:
+            self.right_child.inorder()
+
     def get_right(self):
         return self.right_child
 
@@ -67,3 +88,9 @@ if __name__ == "__main__":
     print("Right branch:", tree.get_right())
     print("Right branch's root:", branch.get_root())
     print("Tree:", tree)
+    print("Preorder traversal:")
+    tree.preorder()
+    print("Postorder traversal:")
+    tree.postorder()
+    print("Inorder traversal:")
+    tree.inorder()
