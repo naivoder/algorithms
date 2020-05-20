@@ -9,7 +9,19 @@ from nodeReference import *
 operators = "+-*/)"
 
 def build_parser(expression, debug=False):
-    pieces = expression.split()
+    if " " in expression:
+        pieces = expression.split()
+    else:
+        pieces = [char for char in expression]
+        for index in range(len(pieces)):
+            if pieces[index].isdigit():
+                number = str(pieces[index])
+                start = index
+                while index < len(pieces) and pieces[index+1].isdigit():
+                    number += str(pieces[index])
+                    index += 1
+                end = index
+                pieces = pieces[:start] + list(number) + pieces[end+1:]
     if debug:
         print("Pieces:", pieces)
     tree_stack = Stack()
@@ -55,5 +67,9 @@ if __name__=="__main__":
     test_equation = "( 3 + ( 4 * 5 ) )"
     parse_tree = build_parser(test_equation)
     print("###---Parse Tree---###")
+    print("Equation:", test_equation)
+    print("Solution:", evaluate(parse_tree))
+    test_equation = "(4*(9-3))"
+    parse_tree = build_parser(test_equation, debug=True)
     print("Equation:", test_equation)
     print("Solution:", evaluate(parse_tree))
