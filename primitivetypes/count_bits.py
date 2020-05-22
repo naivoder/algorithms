@@ -1,7 +1,7 @@
 """
 this file implements a simple program to count the number of bits are set to '1' in a given number
 it demonstrates shifting and masking techniques and is rather rude if your inputs are incorrect
-experimenting with unpacking a function return with
+runtime is O(n) where n = word size
 
 """
 
@@ -32,4 +32,3 @@ def show(given, binary, solution):
 if __name__=="__main__":
     show(*count_bits(13))
     show(*count_bits())
-    
