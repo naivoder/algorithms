@@ -17,10 +17,10 @@ def buy_and_sell(prices:list) -> float:
         sell_today = price - min_price
         max_profit = max(max_profit, sell_today)
         min_price = min(min_price, price)
-    return max_profit
+    return round(max_profit, 2)
 
 if __name__=="__main__":
     test_prices = [round(random.random()*100, 2) for day in range(30)]
-    print("Stock prices:\n", test_prices)
     print("###---Buy and Sell for Max Profit---###")
+    print("Stock prices:\n", test_prices)
     print("Max profit:", buy_and_sell(test_prices))
