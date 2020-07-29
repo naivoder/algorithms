@@ -1,3 +1,9 @@
+"""
+this file implements an algorithm to generate a random subset of size k, given a range of size n
+to do this efficiently, a hash table is used to map random values to their index
+if the value already exists in the table, the previous index is stored as the new value
+
+"""
 
 import random
 
